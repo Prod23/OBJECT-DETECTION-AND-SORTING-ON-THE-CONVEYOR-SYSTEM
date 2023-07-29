@@ -9,8 +9,17 @@ Overall, this project aims to enhance the conveyor system's capabilities, provid
 
 # Additional Info
 
-Training Dataset size: 15,517 Validation Dataset size: 61
+Training Dataset size: 15,517 Validation Dataset size: 61 which have box and bottle images from OpenImagesv7 and webcam images on the conveyor system.
 
 During the training process of the YOLOv8m model, the initial configuration was set to run for 300 epochs, and each epoch had a batch size of 16, resulting in a total of 948 batches for each epoch. However, the training process early stopped at the 104th epoch, which means the model did not complete all 300 epochs as originally planned.
 Throughout the 104 epochs of training, the graph below shows the progress of our YOLOv8m model by tracking various metrics. These metrics included the training and validation losses for bounding box regression (box loss), class prediction (cls loss), and object detection confidence loss (dfl loss). We also measured the Mean Average Precision at 50 IoU (mAP50) and Mean Average Precision from 50 to 95 IoU (mAP50-95) at each epoch.
+
+# Test.py File
+
+Modify and run the test.py file to run the custom trained model (best.pt has the weights) on your our system by choosing suitable webcam for working.
+
+# yolov8_labels.py File
+
+If you are using your own custom dataset to train your yolo model you need to make the labels yolov8 compatible if it isn't already, this py file will help to make it yolov8 compatible.
+*Note : this code specifically deals with only two classes box and bottle though with few changes in the code it can be generalized.
 
