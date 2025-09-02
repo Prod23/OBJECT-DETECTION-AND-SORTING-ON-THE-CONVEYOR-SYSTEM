@@ -2,7 +2,6 @@
 
 [![CI Pipeline](https://github.com/your-username/conveyor-detection/workflows/CI%20Pipeline/badge.svg)](https://github.com/your-username/conveyor-detection/actions)
 [![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 
 An end-to-end, production-ready object detection and sorting system for industrial conveyor belts using YOLOv8. This project transforms raw conveyor camera feeds into intelligent sorting decisions with real-time inference, comprehensive MLOps pipeline, and deployment-ready packaging.
@@ -332,9 +331,6 @@ flake8 src/ scripts/ tests/
 mypy src/
 ```
 
-## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ## 🙏 Acknowledgments
 
