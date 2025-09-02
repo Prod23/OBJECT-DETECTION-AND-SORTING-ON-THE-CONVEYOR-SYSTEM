@@ -1,0 +1,77 @@
+# Inference Configuration for Conveyor Object Detection System
+
+# Model Configuration
+model:
+  weights_path: "runs/train/exp/weights/best.pt"
+  device: "auto"  # auto, cpu, 0, 1, 2, etc.
+  half_precision: true
+  compile: false
+
+# Input Configuration
+input:
+  source: "webcam"  # webcam, video, image, directory
+  webcam_id: 0
+  video_path: null
+  image_path: null
+  directory_path: null
+  imgsz: 640
+  
+# Detection Parameters
+detection:
+  conf_threshold: 0.5
+  iou_threshold: 0.45
+  max_detections: 100
+  agnostic_nms: false
+  multi_label: false
+  classes: null  # Filter by class: [0, 1] or null for all
+  
+# Output Configuration
+output:
+  save_results: true
+  save_dir: "runs/inference"
+  save_txt: true
+  save_conf: true
+  save_json: false
+  save_crop: false
+  show_results: true
+  show_labels: true
+  show_conf: true
+  line_thickness: 2
+  
+# Video Processing
+video:
+  fps: null  # Use original FPS if null
+  fourcc: "mp4v"
+  quality: 95
+  
+# Real-time Processing
+realtime:
+  buffer_size: 1
+  skip_frames: 0
+  display_fps: true
+  max_fps: 30
+  
+# Conveyor System Specific
+conveyor:
+  belt_speed: 1.0  # m/s
+  camera_height: 1.5  # meters
+  detection_zone:
+    x_min: 0.2  # Relative coordinates (0-1)
+    y_min: 0.2
+    x_max: 0.8
+    y_max: 0.8
+  sorting_delay: 0.5  # seconds
+  
+# Post-processing
+postprocess:
+  track_objects: true
+  min_track_length: 5
+  max_disappeared: 10
+  centroid_distance_threshold: 50
+  
+# Logging
+logging:
+  log_level: "INFO"
+  log_detections: true
+  log_performance: true
+  performance_window: 100  # frames

@@ -1,0 +1,58 @@
+version: '3.8'
+
+services:
+  # Development environment with Jupyter
+  conveyor-dev:
+    build:
+      context: .
+      target: development
+    container_name: conveyor-detection-dev
+    ports:
+      - "8888:8888"  # Jupyter
+      - "8000:8000"  # API (if needed)
+    volumes:
+      - .:/app
+      - ./data:/app/data
+      - ./runs:/app/runs
+      - ./logs:/app/logs
+    environment:
+      - JUPYTER_ENABLE_LAB=yes
+    networks:
+      - conveyor-network
+
+  # Production inference service
+  conveyor-prod:
+    build:
+      context: .
+      target: production
+    container_name: conveyor-detection-prod
+    ports:
+      - "8001:8000"
+    volumes:
+      - ./data:/app/data:ro
+      - ./runs:/app/runs:ro
+      - ./config:/app/config:ro
+    environment:
+      - PYTHONPATH=/app
+    networks:
+      - conveyor-network
+    command: ["python", "scripts/infer.py", "--config", "config/inference.yaml", "--source", "webcam"]
+
+  # MLflow tracking server
+  mlflow:
+    image: python:3.9-slim
+    container_name: conveyor-mlflow
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./mlruns:/mlruns
+    working_dir: /app
+    command: >
+      bash -c "pip install mlflow && 
+               mlflow server --host 0.0.0.0 --port 5000 --backend-store-uri file:///mlruns"
+    networks:
+      - conveyor-network
+
+networks:
+  conveyor-network:
+    driver: bridge
